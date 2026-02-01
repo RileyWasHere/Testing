@@ -135,9 +135,9 @@ function checkGuess () {
         }
 
         let delay = 250 * i
-        setTimeout(()=> {
+        setTimeout(async ()=> {
             //flip box
-            animateCSS(box, 'flipInX')
+            await animateCSS(box, 'flipInX')
             //shade box
             box.style.backgroundColor = letterColor
             box.style.color = 'white'
@@ -201,7 +201,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
     const animationName = `${prefix}${animation}`;
     // const node = document.querySelector(element);
     const node = element
-    node.style.setProperty('--animate-duration', '0.9s');
+    node.style.setProperty('--animate-duration', '1.2s');
 
     node.classList.add(`${prefix}animated`, animationName);
 
