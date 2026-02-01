@@ -142,27 +142,23 @@ function checkGuess () {
         letters.push(letter)
 
         let delay = 250 * i
-        let animationPromise = new Promise((resolve) => {
-            setTimeout(()=> {
-                //shade box immediately as flip starts
-                box.style.backgroundColor = letterColor
-                box.style.color = 'white'
-                box.style.borderColor = 'transparent'
-                //flip box
-                animateCSS(box, 'flipInX')
-                // Resolve exactly when animation should complete (1200ms duration)
-                setTimeout(resolve, 1200)
-            }, delay)
-        })
-        animationPromises.push(animationPromise)
+        setTimeout(()=> {
+            //shade box immediately as flip starts
+            box.style.backgroundColor = letterColor
+            box.style.color = 'white'
+            box.style.borderColor = 'transparent'
+            //flip box
+            animateCSS(box, 'flipInX')
+        }, delay)
     }
 
-    // Update all keyboard keys immediately after all animations complete
-    Promise.all(animationPromises).then(() => {
+    // Update all keyboard keys at exact moment last animation completes
+    // Last tile starts at 250*4=1000ms, animation is 1200ms, so total is 2200ms
+    setTimeout(() => {
         for (let i = 0; i < 5; i++) {
             shadeKeyBoard(letters[i], letterColors[i])
         }
-    })
+    }, 2200)
 
     if (guessString === rightGuessString.toLowerCase()) {
         toastr.success("You guessed right! Game over!")
