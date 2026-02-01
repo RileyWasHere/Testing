@@ -12,7 +12,7 @@ body {
 
 body.light-mode {
   background: #ffffff;
-  color: #111;
+  color: white;
 }
 
 body.light-mode h1 {
@@ -22,7 +22,7 @@ body.light-mode h1 {
 body.light-mode .letter-box {
   border-color: #d3d6da;
   background: #ffffff;
-  color: #111;
+  color: white;
 }
 
 body.light-mode .filled-box {
@@ -31,7 +31,7 @@ body.light-mode .filled-box {
 
 body.light-mode .keyboard-button {
   background-color: #d3d6da;
-  color: #111;
+  color: white;
 }
 
 h1 {
