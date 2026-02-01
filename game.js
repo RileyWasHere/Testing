@@ -191,7 +191,7 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
         key = "Backspace"
     } 
 
-    document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
+    document.dispatchEvent(new KeyboardEvent("keydown", {'key': key}))
 })
 
 const animateCSS = (element, animation, prefix = 'animate__') =>
@@ -200,7 +200,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
     const animationName = `${prefix}${animation}`;
     // const node = document.querySelector(element);
     const node = element
-    node.style.setProperty('--animate-duration', '0.6s');
+    node.style.setProperty('--animate-duration', '0.7s');
 
     node.classList.add(`${prefix}animated`, animationName);
 
