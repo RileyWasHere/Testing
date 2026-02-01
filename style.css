@@ -32,12 +32,12 @@ body.light-mode .letter-box {
 }
 
 body.light-mode .filled-box {
-  border-color: #d3d6da;
+  border-color: #787c7e;
 }
 
 body.light-mode .keyboard-button {
   background-color: #d3d6da;
-  color: white;
+  color: #111;
 }
 
 h1 {
@@ -63,7 +63,7 @@ h1 {
 }
 
 .filled-box {
-  border: 2px solid #787c7e;
+  border: 2px solid #d3d6da;
 }
 
 .letter-row {
@@ -92,7 +92,7 @@ h1 {
   margin: 0 4px;
   cursor: pointer;
   text-transform: uppercase;
-  background-color: #818384;
+  background-color: #d3d6da;
   color: white;
   border: none;
   border-radius: 4px;
