@@ -141,7 +141,7 @@ function checkGuess () {
         letterColors.push(letterColor)
         letters.push(letter)
 
-        let delay = 250 * i
+        let delay = 350 * i
         setTimeout(()=> {
             //shade box immediately as flip starts
             box.style.backgroundColor = letterColor
@@ -153,12 +153,12 @@ function checkGuess () {
     }
 
     // Update all keyboard keys at exact moment last animation completes
-    // Last tile starts at 250*4=1000ms, animation is 1200ms, so total is 2200ms
+    // Last tile starts at 350*4=1400ms, animation is 1200ms, so total is 2600ms
     setTimeout(() => {
         for (let i = 0; i < 5; i++) {
             shadeKeyBoard(letters[i], letterColors[i])
         }
-    }, 2200)
+    }, 2600)
 
     if (guessString === rightGuessString.toLowerCase()) {
         toastr.success("You guessed right! Game over!")
