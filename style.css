@@ -105,10 +105,10 @@ h1 {
 
 @media (max-width: 600px) {
   .keyboard-button {
-    font-size: 0.75rem;
-    padding: 0.35rem 0.2rem;
-    margin: 0 1px;
-    min-width: 24px;
-    min-height: 24px;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.25rem;
+    margin: 0 1.5px;
+    min-width: 28px;
+    min-height: 28px;
   }
 }
