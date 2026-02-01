@@ -14,7 +14,7 @@
 </head>
 <body>
     <div style="display: flex; justify-content: center; align-items: center; padding: 1rem;">
-        <h1 style="margin: 0;"> Canoedle </h1>
+        <h1 style="margin: 0;"> CANOEDLE </h1>
     </div>
     
     <button id="themeToggle" style="position: fixed; bottom: 2rem; right: 2rem; background: transparent; border: 2px solid white; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; z-index: 1000;">
@@ -93,6 +93,8 @@ crossorigin="anonymous"></script>
     svgs.forEach(svg => {
       svg.setAttribute('stroke', isLight ? '#111' : 'white');
     });
+    
+    this.blur();
   });
 </script>
 <script src="game.js" type="module"></script>
