@@ -2,6 +2,7 @@ const ANSWER = "CANOE";
 let currentRow = 0;
 
 const board = document.getElementById("board");
+const keyboard = document.getElementById("keyboard");
 
 for (let i = 0; i < 6; i++) {
   const row = document.createElement("div");
@@ -29,6 +30,7 @@ function submitGuess() {
     if (guess[i] === ANSWER[i]) {
       row.children[i].classList.add("correct");
       answerArr[i] = null;
+      row.children[i].style.animation = "bounce 0.5s";
     }
   }
 
@@ -38,6 +40,7 @@ function submitGuess() {
     if (answerArr.includes(guess[i])) {
       row.children[i].classList.add("present");
       answerArr[answerArr.indexOf(guess[i])] = null;
+      row.children[i].style.animation = "bounce 0.5s";
     } else {
       row.children[i].classList.add("absent");
     }
@@ -46,3 +49,36 @@ function submitGuess() {
   input.value = "";
   currentRow++;
 }
+
+function createKeyboard() {
+  const keys = "QWERTYUIOPASDFGHJKLZXCVBNM";
+  keys.split("").forEach(key => {
+    const keyDiv = document.createElement("div");
+    keyDiv.className = "key";
+    keyDiv.textContent = key;
+    keyDiv.addEventListener("click", () => handleKeyPress(key));
+    keyboard.appendChild(keyDiv);
+  });
+  const enterKey = document.createElement("div");
+  enterKey.className = "key enter";
+  enterKey.textContent = "ENTER";
+  enterKey.addEventListener("click", submitGuess);
+  keyboard.appendChild(enterKey);
+  const backspaceKey = document.createElement("div");
+  backspaceKey.className = "key backspace";
+  backspaceKey.textContent = "BACKSPACE";
+  backspaceKey.addEventListener("click", () => {
+    const input = document.getElementById("guessInput");
+    input.value = input.value.slice(0, -1);
+  });
+  keyboard.appendChild(backspaceKey);
+}
+
+function handleKeyPress(key) {
+  const input = document.getElementById("guessInput");
+  if (input.value.length < 5) {
+    input.value += key;
+  }
+}
+
+createKeyboard();
