@@ -151,12 +151,12 @@ function checkGuess () {
         }, delay)
     }
 
-    // Update keyboard after all animations complete (5 tiles * 250ms delay + animation duration)
+    // Update keyboard after all animations complete (5 tiles * animation duration)
     setTimeout(() => {
         for (let i = 0; i < 5; i++) {
             shadeKeyBoard(letters[i], letterColors[i])
         }
-    }, 5 * 250 + 1200)
+    }, 5 *  1200)
 
     if (guessString === rightGuessString.toLowerCase()) {
         toastr.success("You guessed right! Game over!")
