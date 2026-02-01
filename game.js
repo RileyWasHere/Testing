@@ -144,12 +144,12 @@ function checkGuess () {
         let delay = 250 * i
         let animationPromise = new Promise((resolve) => {
             setTimeout(async ()=> {
-                //flip box
-                await animateCSS(box, 'flipInX')
-                //shade box
+                //shade box immediately as flip starts
                 box.style.backgroundColor = letterColor
                 box.style.color = 'white'
                 box.style.borderColor = 'transparent'
+                //flip box
+                await animateCSS(box, 'flipInX')
                 resolve()
             }, delay)
         })
