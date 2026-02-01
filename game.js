@@ -4,7 +4,7 @@ const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
-let rightGuessString = "CANOE";
+let rightGuessString = "canoe";
 
 function initBoard() {
     let board = document.getElementById("game-board");
@@ -127,7 +127,7 @@ function checkGuess () {
         }, delay)
     }
 
-    if (guessString === rightGuessString) {
+    if (guessString === rightGuessString.toLowerCase()) {
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
         return
