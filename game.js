@@ -5,7 +5,6 @@ let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
 let rightGuessString = "CANOE";
-console.log(rightGuessString)
 
 function initBoard() {
     let board = document.getElementById("game-board");
