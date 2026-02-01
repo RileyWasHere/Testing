@@ -161,10 +161,7 @@ function checkGuess () {
     }, 2000)
 
     if (guessString === rightGuessString.toLowerCase()) {
-        // Show success message after animations complete
-        setTimeout(() => {
-            toastr.success("You guessed right! Game over!")
-        }, 2000)
+        toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
         return
     } else {
