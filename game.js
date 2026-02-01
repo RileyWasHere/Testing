@@ -101,17 +101,17 @@ function checkGuess () {
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         // is letter in the correct guess
         if (letterPosition === -1) {
-            letterColor = '#3A3A3C'
+            letterColor = '#787c7e'
         } else {
             // now, letter is definitely in word
             // if letter index and right guess index are the same
             // letter is in the right position 
             if (currentGuess[i] === rightGuess[i]) {
                 // shade green 
-                letterColor = '#538D4E'
+                letterColor = '#6aaa64'
             } else {
                 // shade box yellow
-                letterColor = '#B59F3B'
+                letterColor = '#c9b458'
             }
 
             rightGuess[letterPosition] = "#"
@@ -184,7 +184,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
     const animationName = `${prefix}${animation}`;
     // const node = document.querySelector(element);
     const node = element
-    node.style.setProperty('--animate-duration', '0.3s');
+    node.style.setProperty('--animate-duration', '0.6s');
 
     node.classList.add(`${prefix}animated`, animationName);
 

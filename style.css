@@ -38,14 +38,14 @@ body.light-mode .keyboard-button {
 h1 {
   margin: 0;
   padding: 1rem;
-  border-bottom: 1px solid #3a3a3c;
+  border-bottom: 1px solid #787c7e;
   font-size: 2rem;
   font-weight: 700;
 }
 
 .letter-box {
-  border: 2px solid #3a3a3c;
-  border-radius: 3px;
+  border: 2px solid #787c7e;
+  border-radius: 0;
   margin: 2px;
   font-size: 2.5rem;
   font-weight: 700;
