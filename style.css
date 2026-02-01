@@ -60,6 +60,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  transform-origin: center;
 }
 
 .filled-box {
@@ -105,19 +106,28 @@ h1 {
 
 @keyframes flip {
   0%, 100% {
-    transform: rotateX(0deg);
+    transform: scaleY(1);
   }
   50% {
-    transform: rotateX(90deg);
+    transform: scaleY(0);
   }
 }
 
 @keyframes hideText {
   0%, 100% {
-    color: white;
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
   }
   50% {
-    color: transparent;
+    opacity: 0;
+  }
+  51% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
