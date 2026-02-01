@@ -5,6 +5,7 @@ let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
 let rightGuessString = "canoe";
+let previousGuesses = [];
 
 function initBoard() {
     let board = document.getElementById("game-board");
@@ -92,6 +93,11 @@ function checkGuess () {
         return
     }
 
+    if (previousGuesses.includes(guessString)) {
+        toastr.error("Already guessed this word!")
+        return
+    }
+
 
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
@@ -130,6 +136,7 @@ function checkGuess () {
     }
 
     if (guessString === rightGuessString.toLowerCase()) {
+        previousGuesses.push(guessString);
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
         return
