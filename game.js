@@ -110,6 +110,9 @@ function checkGuess () {
     // Add to previous guesses
     previousGuesses.push(guessString);
 
+    let letterColors = []
+    let letters = []
+
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
         let box = row.children[i]
@@ -134,17 +137,26 @@ function checkGuess () {
             rightGuess[letterPosition] = "#"
         }
 
+        letterColors.push(letterColor)
+        letters.push(letter)
+
         let delay = 250 * i
-        setTimeout(async ()=> {
+        setTimeout(()=> {
             //flip box
-            await animateCSS(box, 'flipInX')
+            animateCSS(box, 'flipInX')
             //shade box
             box.style.backgroundColor = letterColor
             box.style.color = 'white'
             box.style.borderColor = 'transparent'
-            shadeKeyBoard(letter, letterColor)
         }, delay)
     }
+
+    // Update keyboard after all animations complete (5 tiles * 250ms delay + animation duration)
+    setTimeout(() => {
+        for (let i = 0; i < 5; i++) {
+            shadeKeyBoard(letters[i], letterColors[i])
+        }
+    }, 5 * 250 + 1200)
 
     if (guessString === rightGuessString.toLowerCase()) {
         toastr.success("You guessed right! Game over!")
