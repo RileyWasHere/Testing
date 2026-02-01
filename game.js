@@ -42,6 +42,8 @@ document.addEventListener("keydown", (e) => {
         return
     }
     
+    e.preventDefault()
+    
     if (isBackspace && nextLetter !== 0) {
         deleteLetter()
         return
