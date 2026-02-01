@@ -184,11 +184,13 @@ function shadeKeyBoard(letter, color) {
     for (const elem of document.getElementsByClassName("keyboard-button")) {
         if (elem.textContent === letter) {
             let oldColor = elem.style.backgroundColor
-            if (oldColor === 'green') {
+            // Keep green if already green (correct position has priority)
+            if (oldColor === 'rgb(106, 170, 100)') {  // #6aaa64 in rgb
                 return
             } 
 
-            if (oldColor === 'yellow' && color !== 'green') {
+            // Keep yellow if trying to set grey (wrong position has priority over absent)
+            if (oldColor === 'rgb(201, 180, 88)' && color === '#787c7e') {  // #c9b458 in rgb, #787c7e grey
                 return
             }
 
