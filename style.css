@@ -61,6 +61,7 @@ h1 {
   align-items: center;
   text-transform: uppercase;
   transform-origin: center;
+  backface-visibility: hidden;
 }
 
 .filled-box {
@@ -133,6 +134,7 @@ h1 {
 
 .flip {
   animation: flip 1.2s ease-in-out, hideText 1.2s ease-in-out;
+  will-change: transform;
 }
 
 @media (max-width: 600px) {
