@@ -1,94 +1,198 @@
-const ANSWER = "CANOE";
-let currentRow = 0;
+import { WORDS } from "./words.js";
 
-const board = document.getElementById("board");
-const keyboard = document.getElementById("keyboard");
+const NUMBER_OF_GUESSES = 6;
+let guessesRemaining = NUMBER_OF_GUESSES;
+let currentGuess = [];
+let nextLetter = 0;
+let rightGuessString = "CANOE";
+console.log(rightGuessString)
 
-for (let i = 0; i < 6; i++) {
-  const row = document.createElement("div");
-  row.className = "row";
-  for (let j = 0; j < 5; j++) {
-    const tile = document.createElement("div");
-    tile.className = "tile";
-    row.appendChild(tile);
-  }
-  board.appendChild(row);
-}
+function initBoard() {
+    let board = document.getElementById("game-board");
 
-async function isValidWord(word) {
-  const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-  return response.ok;
-}
+    for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
+        let row = document.createElement("div")
+        row.className = "letter-row"
 
-async function submitGuess() {
-  const input = document.getElementById("guessInput");
-  const guess = input.value.toUpperCase();
+        for (let j = 0; j < 5; j++) {
+            let box = document.createElement("div")
+            box.className = "letter-box"
+            row.appendChild(box)
+        }
 
-  if (guess.length !== 5) return;
-
-  if (!await isValidWord(guess.toLowerCase())) {
-    alert("Please enter a valid English word.");
-    return;
-  }
-
-  const row = board.children[currentRow];
-  const answerArr = ANSWER.split("");
-
-  // First pass: correct letters
-  for (let i = 0; i < 5; i++) {
-    row.children[i].textContent = guess[i];
-    if (guess[i] === ANSWER[i]) {
-      row.children[i].classList.add("correct");
-      answerArr[i] = null;
-      row.children[i].style.animation = "bounce 0.5s";
+        board.appendChild(row)
     }
-  }
+}
 
-  // Second pass: present / absent
-  for (let i = 0; i < 5; i++) {
-    if (row.children[i].classList.contains("correct")) continue;
-    if (answerArr.includes(guess[i])) {
-      row.children[i].classList.add("present");
-      answerArr[answerArr.indexOf(guess[i])] = null;
-      row.children[i].style.animation = "bounce 0.5s";
+initBoard()
+document.addEventListener("keyup", (e) => {
+
+    if (guessesRemaining === 0) {
+        return
+    }
+
+    let pressedKey = String(e.key)
+    if (pressedKey === "Backspace" && nextLetter !== 0) {
+        deleteLetter()
+        return
+    }
+
+    if (pressedKey === "Enter") {
+        checkGuess()
+        return
+    }
+
+    let found = pressedKey.match(/[a-z]/gi)
+    if (!found || found.length > 1) {
+        return
     } else {
-      row.children[i].classList.add("absent");
+        insertLetter(pressedKey)
     }
-  }
+})
 
-  input.value = "";
-  currentRow++;
+function insertLetter (pressedKey) {
+    if (nextLetter === 5) {
+        return
+    }
+    pressedKey = pressedKey.toLowerCase()
+    
+    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let box = row.children[nextLetter]
+    animateCSS(box, "pulse")
+    box.textContent = pressedKey
+    box.classList.add("filled-box")
+    currentGuess.push(pressedKey)
+    nextLetter += 1
 }
 
-function createKeyboard() {
-  const keys = "QWERTYUIOPASDFGHJKLZXCVBNM";
-  keys.split("").forEach(key => {
-    const keyDiv = document.createElement("div");
-    keyDiv.className = "key";
-    keyDiv.textContent = key;
-    keyDiv.addEventListener("click", () => handleKeyPress(key));
-    keyboard.appendChild(keyDiv);
-  });
-  const enterKey = document.createElement("div");
-  enterKey.className = "key enter";
-  enterKey.textContent = "ENTER";
-  enterKey.addEventListener("click", submitGuess);
-  keyboard.appendChild(enterKey);
-  const backspaceKey = document.createElement("div");
-  backspaceKey.className = "key backspace";
-  backspaceKey.textContent = "BACKSPACE";
-  backspaceKey.addEventListener("click", () => {
-    const input = document.getElementById("guessInput");
-    input.value = input.value.slice(0, -1);
-  });
-  keyboard.appendChild(backspaceKey);
+function deleteLetter () {
+    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let box = row.children[nextLetter - 1]
+    box.textContent = ""
+    box.classList.remove("filled-box")
+    currentGuess.pop()
+    nextLetter -= 1
 }
 
-function handleKeyPress(key) {
-  const input = document.getElementById("guessInput");
-  if (input.value.length < 5) {
-    input.value += key;
-  }
+function checkGuess () {
+    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let guessString = ''
+    let rightGuess = Array.from(rightGuessString)
+
+    for (const val of currentGuess) {
+        guessString += val
+    }
+
+    if (guessString.length != 5) {
+        toastr.error("Not enough letters!")
+        return
+    }
+
+    if (!WORDS.includes(guessString)) {
+        toastr.error("Word not in list!")
+        return
+    }
+
+
+    for (let i = 0; i < 5; i++) {
+        let letterColor = ''
+        let box = row.children[i]
+        let letter = currentGuess[i]
+
+        let letterPosition = rightGuess.indexOf(currentGuess[i])
+        // is letter in the correct guess
+        if (letterPosition === -1) {
+            letterColor = 'grey'
+        } else {
+            // now, letter is definitely in word
+            // if letter index and right guess index are the same
+            // letter is in the right position 
+            if (currentGuess[i] === rightGuess[i]) {
+                // shade green 
+                letterColor = 'green'
+            } else {
+                // shade box yellow
+                letterColor = 'yellow'
+            }
+
+            rightGuess[letterPosition] = "#"
+        }
+
+        let delay = 250 * i
+        setTimeout(()=> {
+            //flip box
+            animateCSS(box, 'flipInX')
+            //shade box
+            box.style.backgroundColor = letterColor
+            shadeKeyBoard(letter, letterColor)
+        }, delay)
+    }
+
+    if (guessString === rightGuessString) {
+        toastr.success("You guessed right! Game over!")
+        guessesRemaining = 0
+        return
+    } else {
+        guessesRemaining -= 1;
+        currentGuess = [];
+        nextLetter = 0;
+
+        if (guessesRemaining === 0) {
+            toastr.error("You've run out of guesses! Game over!")
+            toastr.info(`The right word was: "${rightGuessString}"`)
+        }
+    }
 }
 
-createKeyboard();
+function shadeKeyBoard(letter, color) {
+    for (const elem of document.getElementsByClassName("keyboard-button")) {
+        if (elem.textContent === letter) {
+            let oldColor = elem.style.backgroundColor
+            if (oldColor === 'green') {
+                return
+            } 
+
+            if (oldColor === 'yellow' && color !== 'green') {
+                return
+            }
+
+            elem.style.backgroundColor = color
+            break
+        }
+    }
+}
+
+document.getElementById("keyboard-cont").addEventListener("click", (e) => {
+    const target = e.target
+
+    if (!target.classList.contains("keyboard-button")) {
+        return
+    }
+    let key = target.textContent
+
+    if (key === "Del") {
+        key = "Backspace"
+    } 
+
+    document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
+})
+
+const animateCSS = (element, animation, prefix = 'animate__') =>
+  // We create a Promise and return it
+  new Promise((resolve, reject) => {
+    const animationName = `${prefix}${animation}`;
+    // const node = document.querySelector(element);
+    const node = element
+    node.style.setProperty('--animate-duration', '0.3s');
+
+    node.classList.add(`${prefix}animated`, animationName);
+
+    // When the animation ends, we clean the classes and resolve the Promise
+    function handleAnimationEnd(event) {
+      event.stopPropagation();
+      node.classList.remove(`${prefix}animated`, animationName);
+      resolve('Animation ended');
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd, {once: true});
+});
