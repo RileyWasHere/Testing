@@ -4,6 +4,34 @@ body {
   background: #111;
   color: white;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body.light-mode {
+  background: #ffffff;
+  color: #111;
+}
+
+body.light-mode h1 {
+  border-bottom-color: #d3d6da;
+}
+
+body.light-mode .letter-box {
+  border-color: #d3d6da;
+  background: #ffffff;
+  color: #111;
+}
+
+body.light-mode .filled-box {
+  border-color: #111;
+}
+
+body.light-mode .keyboard-button {
+  background-color: #d3d6da;
+  color: #111;
 }
 
 h1 {
@@ -15,13 +43,13 @@ h1 {
 }
 
 .letter-box {
-  border: 2px solid gray;
+  border: 2px solid #d3d6da;
   border-radius: 3px;
   margin: 2px;
   font-size: 2.5rem;
   font-weight: 700;
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;

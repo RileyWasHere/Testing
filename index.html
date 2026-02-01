@@ -13,7 +13,11 @@
   />
 </head>
 <body>
-    <h1> Canoedle </h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem;">
+        <div></div>
+        <h1 style="flex: 1; margin: 0;"> Canoedle </h1>
+        <button id="themeToggle" style="background: #818384; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 700;">Light Mode</button>
+    </div>
 
     <div id="game-board">
     </div>
@@ -58,6 +62,12 @@ src="https://code.jquery.com/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    document.body.classList.toggle('light-mode');
+    this.textContent = document.body.classList.contains('light-mode') ? 'Dark Mode' : 'Light Mode';
+  });
+</script>
 <script src="game.js" type="module"></script>
 </body>
 </html>
