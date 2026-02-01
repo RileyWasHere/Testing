@@ -15,11 +15,21 @@ for (let i = 0; i < 6; i++) {
   board.appendChild(row);
 }
 
-function submitGuess() {
+async function isValidWord(word) {
+  const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+  return response.ok;
+}
+
+async function submitGuess() {
   const input = document.getElementById("guessInput");
   const guess = input.value.toUpperCase();
 
   if (guess.length !== 5) return;
+
+  if (!await isValidWord(guess.toLowerCase())) {
+    alert("Please enter a valid English word.");
+    return;
+  }
 
   const row = board.children[currentRow];
   const answerArr = ANSWER.split("");
