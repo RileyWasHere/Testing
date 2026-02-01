@@ -25,27 +25,34 @@ function initBoard() {
 }
 
 initBoard()
-document.addEventListener("keyup", (e) => {
+document.addEventListener("keydown", (e) => {
 
     if (guessesRemaining === 0) {
         return
     }
 
     let pressedKey = String(e.key)
-    if (pressedKey === "Backspace" && nextLetter !== 0) {
+    
+    // Only allow letter keys, Backspace, and Enter
+    const isLetter = pressedKey.length === 1 && pressedKey.match(/[a-z]/i)
+    const isBackspace = pressedKey === "Backspace"
+    const isEnter = pressedKey === "Enter"
+    
+    if (!isLetter && !isBackspace && !isEnter) {
+        return
+    }
+    
+    if (isBackspace && nextLetter !== 0) {
         deleteLetter()
         return
     }
 
-    if (pressedKey === "Enter") {
+    if (isEnter) {
         checkGuess()
         return
     }
 
-    let found = pressedKey.match(/[a-z]/gi)
-    if (!found || found.length > 1) {
-        return
-    } else {
+    if (isLetter) {
         insertLetter(pressedKey)
     }
 })
