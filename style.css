@@ -104,19 +104,25 @@ h1 {
 }
 
 @keyframes flip {
-  0% {
-    transform: scaleX(1);
+  0%, 100% {
+    transform: rotateX(0deg);
   }
   50% {
-    transform: scaleX(0);
+    transform: rotateX(90deg);
   }
-  100% {
-    transform: scaleX(1);
+}
+
+@keyframes hideText {
+  0%, 100% {
+    color: white;
+  }
+  50% {
+    color: transparent;
   }
 }
 
 .flip {
-  animation: flip 1.2s ease-in-out;
+  animation: flip 1.2s ease-in-out, hideText 1.2s ease-in-out;
 }
 
 @media (max-width: 600px) {
