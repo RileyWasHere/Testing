@@ -114,7 +114,7 @@ h1 {
 }
 
 .flip {
-  animation: flip 1.2s ease-in-out;
+  animation: flip 1.2s ease-in-out, hideText 1.2s ease-in-out;
 }
 
 @media (max-width: 600px) {

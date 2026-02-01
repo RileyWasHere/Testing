@@ -143,17 +143,12 @@ function checkGuess () {
 
         let delay = 350 * i
         setTimeout(()=> {
+            //shade box immediately as flip starts
+            box.style.backgroundColor = letterColor
+            box.style.color = 'white'
+            box.style.borderColor = 'transparent'
             //flip box
-            box.classList.add('flip')
-            // reveal color at midpoint of the flip (1.2s / 2 = 600ms)
-            setTimeout(() => {
-                box.style.backgroundColor = letterColor
-                box.style.color = 'white'
-                box.style.borderColor = 'transparent'
-            }, 600)
-            box.addEventListener('animationend', () => {
-                box.classList.remove('flip')
-            }, { once: true })
+            animateCSS(box, 'flipInX')
         }, delay)
     }
 
