@@ -101,17 +101,17 @@ function checkGuess () {
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         // is letter in the correct guess
         if (letterPosition === -1) {
-            letterColor = 'grey'
+            letterColor = '#3A3A3C'
         } else {
             // now, letter is definitely in word
             // if letter index and right guess index are the same
             // letter is in the right position 
             if (currentGuess[i] === rightGuess[i]) {
                 // shade green 
-                letterColor = 'green'
+                letterColor = '#538D4E'
             } else {
                 // shade box yellow
-                letterColor = 'yellow'
+                letterColor = '#B59F3B'
             }
 
             rightGuess[letterPosition] = "#"
