@@ -123,6 +123,7 @@ function checkGuess () {
             animateCSS(box, 'flipInX')
             //shade box
             box.style.backgroundColor = letterColor
+            box.style.color = 'white'
             shadeKeyBoard(letter, letterColor)
         }, delay)
     }
