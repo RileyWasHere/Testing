@@ -17,12 +17,13 @@ body.light-mode {
 
 body.light-mode h1 {
   border-bottom-color: #d3d6da;
+  color: #111;
 }
 
 body.light-mode .letter-box {
   border-color: #d3d6da;
   background: #ffffff;
-  color: white;
+  color: #111;
 }
 
 body.light-mode .filled-box {
@@ -43,7 +44,7 @@ h1 {
 }
 
 .letter-box {
-  border: 2px solid #d3d6da;
+  border: 2px solid #3a3a3c;
   border-radius: 3px;
   margin: 2px;
   font-size: 2.5rem;
