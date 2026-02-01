@@ -107,6 +107,8 @@ function checkGuess () {
         return
     }
 
+    // Add to previous guesses
+    previousGuesses.push(guessString);
 
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
@@ -145,7 +147,6 @@ function checkGuess () {
     }
 
     if (guessString === rightGuessString.toLowerCase()) {
-        previousGuesses.push(guessString);
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
         return
