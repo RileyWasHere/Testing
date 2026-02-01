@@ -148,7 +148,7 @@ function checkGuess () {
             box.style.color = 'white'
             box.style.borderColor = 'transparent'
             //flip box
-            animateCSS(box, 'flipInX')
+            box.classList.add('flip')
         }, delay)
     }
 

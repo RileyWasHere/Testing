@@ -103,6 +103,19 @@ h1 {
   justify-content: center;
 }
 
+@keyframes flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+.flip {
+  animation: flip 1.2s ease-in-out;
+}
+
 @media (max-width: 600px) {
   .keyboard-button {
     font-size: 1.0rem;
