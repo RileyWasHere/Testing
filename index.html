@@ -13,11 +13,26 @@
   />
 </head>
 <body>
-    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem;">
-        <div></div>
-        <h1 style="flex: 1; margin: 0;"> Canoedle </h1>
-        <button id="themeToggle" style="background: #818384; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 700;">Light Mode</button>
+    <div style="display: flex; justify-content: center; align-items: center; padding: 1rem;">
+        <h1 style="margin: 0;"> Canoedle </h1>
     </div>
+    
+    <button id="themeToggle" style="position: fixed; bottom: 2rem; right: 2rem; background: transparent; border: 2px solid white; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; z-index: 1000;">
+        <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
 
     <div id="game-board">
     </div>
@@ -63,9 +78,21 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
+  const moonIcon = document.getElementById('moonIcon');
+  const sunIcon = document.getElementById('sunIcon');
+  
   document.getElementById('themeToggle').addEventListener('click', function() {
     document.body.classList.toggle('light-mode');
-    this.textContent = document.body.classList.contains('light-mode') ? 'Dark Mode' : 'Light Mode';
+    const isLight = document.body.classList.contains('light-mode');
+    
+    moonIcon.style.display = isLight ? 'none' : 'block';
+    sunIcon.style.display = isLight ? 'block' : 'none';
+    this.style.borderColor = isLight ? '#111' : 'white';
+    
+    const svgs = this.querySelectorAll('svg');
+    svgs.forEach(svg => {
+      svg.setAttribute('stroke', isLight ? '#111' : 'white');
+    });
   });
 </script>
 <script src="game.js" type="module"></script>

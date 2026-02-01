@@ -124,6 +124,7 @@ function checkGuess () {
             //shade box
             box.style.backgroundColor = letterColor
             box.style.color = 'white'
+            box.style.border = 'none'
             shadeKeyBoard(letter, letterColor)
         }, delay)
     }
