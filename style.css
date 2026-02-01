@@ -68,7 +68,6 @@ h1 {
 
 .letter-row {
   display: flex;
-  perspective: 1000px;
 }
 
 #keyboard-cont {
@@ -106,17 +105,18 @@ h1 {
 
 @keyframes flip {
   0% {
-    transform: rotateY(0deg);
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0);
   }
   100% {
-    transform: rotateY(180deg);
+    transform: scaleX(1);
   }
 }
 
 .flip {
   animation: flip 1.2s ease-in-out;
-  transform-style: preserve-3d;
-  transform-origin: center;
 }
 
 @media (max-width: 600px) {
