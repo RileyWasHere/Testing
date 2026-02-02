@@ -70,6 +70,13 @@ function insertLetter (pressedKey) {
     box.classList.remove("tile-bounce")
     void box.offsetWidth
     box.classList.add("tile-bounce")
+    box.addEventListener(
+        "animationend",
+        () => {
+            box.classList.remove("tile-bounce")
+        },
+        { once: true }
+    )
     box.textContent = pressedKey
     box.classList.add("filled-box")
     currentGuess.push(pressedKey)
@@ -145,12 +152,23 @@ function checkGuess () {
 
         let delay = 350 * i
         setTimeout(()=> {
-            //shade box immediately as flip starts
-            box.style.backgroundColor = letterColor
-            box.style.color = 'white'
-            box.style.borderColor = 'transparent'
-            //flip box
-            animateCSS(box, 'flipInX')
+            box.classList.remove('tile-flip')
+            void box.offsetWidth
+            box.classList.add('tile-flip')
+
+            setTimeout(() => {
+                box.style.backgroundColor = letterColor
+                box.style.color = 'white'
+                box.style.borderColor = 'transparent'
+            }, 150)
+
+            box.addEventListener(
+                'animationend',
+                () => {
+                    box.classList.remove('tile-flip')
+                },
+                { once: true }
+            )
         }, delay)
     }
 

@@ -61,6 +61,8 @@ h1 {
   align-items: center;
   text-transform: uppercase;
   transform-origin: center;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 @keyframes tile-bounce {
@@ -80,6 +82,22 @@ h1 {
 
 .tile-bounce {
   animation: tile-bounce 0.25s ease-in-out;
+}
+
+@keyframes tile-flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.tile-flip {
+  animation: tile-flip 0.3s ease-in-out;
 }
 
 .filled-box {
