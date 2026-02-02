@@ -160,7 +160,7 @@ function checkGuess () {
                 box.style.backgroundColor = letterColor
                 box.style.color = 'white'
                 box.style.borderColor = 'transparent'
-            }, 150)
+            }, 500)
 
             box.addEventListener(
                 'animationend',
