@@ -63,6 +63,25 @@ h1 {
   transform-origin: center;
 }
 
+@keyframes tile-bounce {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  70% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tile-bounce {
+  animation: tile-bounce 0.25s ease-in-out;
+}
+
 .filled-box {
   border: 2px solid #d3d6da;
 }
